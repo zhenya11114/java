@@ -95,4 +95,11 @@ public class Tools
 	    Tools.print("Ellapsed milliseconds: ",now2-now1,"\n");
 	    return now2-now1;
     }
+    
+    public static <T1, T2> boolean isSameType(T1 obj1, T2 obj2) {
+    	if(obj1.getClass() == obj2.getClass()) {
+    		return true;
+    	}
+    	return false;
+    }
 }
