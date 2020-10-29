@@ -25,25 +25,31 @@ public class Tools
 		public static ArrayList<Object> deserialize(String filePath) {
 			ArrayList<Object> result = new ArrayList<Object>();
 			
-			try(ObjectInputStream in = new ObjectInputStream(new FileInputStream(filePath)))
-			{
-				while(true) {
-					result.add(in.readObject());
-				}
-			}
-			catch(EOFException e) {
-				//no need to do anything, the file is read
-			}
-			catch(IOException e)
-			{
-			    System.out.println("IOException is caught");
-			    //e.printStackTrace();
-			}
-			catch(ClassNotFoundException e)
-			{
-			    System.out.println("ClassNotFoundException is caught");
-			    e.printStackTrace();
-			}
+			File f = new File(filePath);
+    		if(f.exists() && !f.isDirectory()) {
+    			try(ObjectInputStream in = new ObjectInputStream(new FileInputStream(f)))
+    			{
+    				while(true) {
+    					result.add(in.readObject());
+    				}
+    			}
+    			catch(EOFException e) {
+    				//no need to do anything, the file is read
+    			}
+    			catch(IOException e)
+    			{
+    			    System.out.println("IOException is caught");
+    			    e.printStackTrace();
+    			}
+    			catch(ClassNotFoundException e)
+    			{
+    			    System.out.println("ClassNotFoundException is caught");
+    			    e.printStackTrace();
+    			}
+    		}
+    		else {
+    			Tools.file.createFile(filePath, "");
+    		}
 			
 			return result;
 		}
@@ -58,10 +64,14 @@ public class Tools
 	    		}
 	    		
 	    		File f = new File(path);
-				
-				FileWriter writer = new FileWriter(f, true);
-		        writer.write(content);
-		        writer.close();
+	    		if(f.exists() && !f.isDirectory()) {
+	    			FileWriter writer = new FileWriter(f, true);
+			        writer.write(content);
+			        writer.close();
+	    		}
+	    		else {
+	    			Tools.file.createFile(path, "");
+	    		}
 			}
 			catch (IOException e) {
 				System.out.println("An error occurred.");
@@ -94,13 +104,18 @@ public class Tools
 	    	String result = "";
 	    	try {
 	    		File f = new File(path);
-	    		FileReader reader = new FileReader(f);
-	    		Scanner scan = new Scanner(reader);
-	    		while (scan.hasNextLine()) {
-	               result += scan.nextLine() + "\n";
-	            }
-	    		scan.close();
-	    		reader.close();
+	    		if(f.exists() && !f.isDirectory()) {
+	    			FileReader reader = new FileReader(f);
+		    		Scanner scan = new Scanner(reader);
+		    		while (scan.hasNextLine()) {
+		               result += scan.nextLine() + "\n";
+		            }
+		    		scan.close();
+		    		reader.close();
+	    		}
+	    		else {
+	    			Tools.file.createFile(path, "");
+	    		}
 	    	}
 	    	catch(IOException e) {
 	    		System.out.println("File not found or error occured.");

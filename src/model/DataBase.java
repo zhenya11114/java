@@ -1,6 +1,7 @@
 package model;
 
 import java.util.List;
+import java.io.File;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -113,7 +114,7 @@ public class DataBase implements Serializable{
 		
 		//Tools.file.createFile(dbFilePath, toString(), true);
 	}
-	public void load() {
+	public void load() {		
 		ArrayList<Object> list = Tools.file.deserialize(base.filePath);
 		if (list.size() > 0) {
 			base = (DataBase)list.get(0);

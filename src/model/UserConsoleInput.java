@@ -181,11 +181,9 @@ public class UserConsoleInput {
 
 	public void start() {
 		props.load();
+		db.getInstance("data.txt").load();
 		
-		if(props.isFirstStart()) {
-			Tools.file.createFile("log.txt", "");
-			Tools.file.createFile("props.txt", "");
-			
+		if(props.isFirstStart()) {	
 			props.setFirstStart(false);
 			
 			Tools.print("Enter your username: ");
@@ -205,10 +203,13 @@ public class UserConsoleInput {
 		else {
 			interact();	
 		}
+		
+		db.getInstance().upload();
+		props.upload();
 	}
 	
 	private void interact() {
-		Tools.print("Start.");
+		Tools.print("Start.\n");
 		
 		if(props.isDoTests()) {
 			doTests();
@@ -237,11 +238,10 @@ public class UserConsoleInput {
 			end = userMenu();
 		}
 		
-		props.upload();
 		Tools.print("Exit.\n");		
 	}
 	private void interactLog() {
-		Tools.printLog("log.txt", "Start.");
+		Tools.printLog("log.txt", "Start.\n");
 		
 		if(props.isDoTests()) {
 			doTestsLog();
@@ -271,7 +271,6 @@ public class UserConsoleInput {
 			end = userMenuLog();
 		}
 		
-		props.upload();
 		Tools.printLog("log.txt", "Exit.\n");
 	}
 	
