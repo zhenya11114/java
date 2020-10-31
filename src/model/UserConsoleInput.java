@@ -5,7 +5,8 @@ import java.util.Scanner;
 public class UserConsoleInput {
 	private String input = "";
 	private Scanner inputReader = new Scanner(System.in);
-	private Properties props = new Properties();
+	private Settings props = new Settings();
+	private String logPath = "log.txt";
 	
 	DataBase db;
 	
@@ -27,20 +28,20 @@ public class UserConsoleInput {
 	public RoadPatrol createPatrolPointLog() {
 		RoadPatrol rp = new RoadPatrol();
 		
-		Tools.printLog("log.txt", "Enter Road Patrol info\n");
-		Tools.printLog("log.txt", "Max body height: ");
+		Tools.printLog(logPath, "Enter Road Patrol info\n");
+		Tools.printLog(logPath, "Max body height: ");
 		input = inputReader.nextLine();
-		Tools.file.appendToFile("log.txt", input);
+		Tools.file.appendToFile(logPath, input);
 		rp.setMaxBodyHeightAvailable(Float.parseFloat(input));
 		
-		Tools.printLog("log.txt", "Max speed: ");
+		Tools.printLog(logPath, "Max speed: ");
 		input = inputReader.nextLine();
-		Tools.file.appendToFile("log.txt", input);
+		Tools.file.appendToFile(logPath, input);
 		rp.setMaxSpeedAvailable(Float.parseFloat(input));
 		
-		Tools.printLog("log.txt", "Max weight: ");
+		Tools.printLog(logPath, "Max weight: ");
 		input = inputReader.nextLine();
-		Tools.file.appendToFile("log.txt", input);
+		Tools.file.appendToFile(logPath, input);
 		rp.setMaxWeightAvailable(Float.parseFloat(input));
 		
 		return rp;
@@ -68,25 +69,25 @@ public class UserConsoleInput {
 	public PassengerCar createPassCarLog() {
 		PassengerCar pc = new PassengerCar();
 		
-		Tools.printLog("log.txt", "Enter Passenger Car info\n");
-		Tools.printLog("log.txt", "Brand: ");
+		Tools.printLog(logPath, "Enter Passenger Car info\n");
+		Tools.printLog(logPath, "Brand: ");
 		input = inputReader.nextLine();
-		Tools.file.appendToFile("log.txt", input);
+		Tools.file.appendToFile(logPath, input);
 		pc.setBrand(input);
 		
-		Tools.printLog("log.txt", "Is radio on: ");
+		Tools.printLog(logPath, "Is radio on: ");
 		input = inputReader.nextLine();
-		Tools.file.appendToFile("log.txt", input);
+		Tools.file.appendToFile(logPath, input);
 		pc.getRadio().setOn(Boolean.parseBoolean(input));
 		
-		Tools.printLog("log.txt", "Set radio station: ");
+		Tools.printLog(logPath, "Set radio station: ");
 		input = inputReader.nextLine();
-		Tools.file.appendToFile("log.txt", input);
+		Tools.file.appendToFile(logPath, input);
 		pc.getRadio().setStation(Float.parseFloat(input));
 		
-		Tools.printLog("log.txt", "Speed: ");
+		Tools.printLog(logPath, "Speed: ");
 		input = inputReader.nextLine();
-		Tools.file.appendToFile("log.txt", input);
+		Tools.file.appendToFile(logPath, input);
 		pc.setSpeed(Float.parseFloat(input));
 		
 		return pc;
@@ -121,35 +122,35 @@ public class UserConsoleInput {
 	public Truck createTruckLog() {
 		Truck t = new Truck();
 		
-		Tools.printLog("log.txt", "Enter Truck info\n");
-		Tools.printLog("log.txt", "Body height: ");
+		Tools.printLog(logPath, "Enter Truck info\n");
+		Tools.printLog(logPath, "Body height: ");
 		input = inputReader.nextLine();
-		Tools.file.appendToFile("log.txt", input);
+		Tools.file.appendToFile(logPath, input);
 		t.setBodyHeight(Float.parseFloat(input));
 		
-		Tools.printLog("log.txt", "Weight: ");
+		Tools.printLog(logPath, "Weight: ");
 		input = inputReader.nextLine();
-		Tools.file.appendToFile("log.txt", input);
+		Tools.file.appendToFile(logPath, input);
 		t.setWeight(Float.parseFloat(input));
 		
-		Tools.printLog("log.txt", "Brand: ");
+		Tools.printLog(logPath, "Brand: ");
 		input = inputReader.nextLine();
-		Tools.file.appendToFile("log.txt", input);
+		Tools.file.appendToFile(logPath, input);
 		t.setBrand(input);
 		
-		Tools.printLog("log.txt", "Is radio on: ");
+		Tools.printLog(logPath, "Is radio on: ");
 		input = inputReader.nextLine();
-		Tools.file.appendToFile("log.txt", input);
+		Tools.file.appendToFile(logPath, input);
 		t.getRadio().setOn(Boolean.parseBoolean(input));
 		
-		Tools.printLog("log.txt", "Set radio station: ");
+		Tools.printLog(logPath, "Set radio station: ");
 		input = inputReader.nextLine();
-		Tools.file.appendToFile("log.txt", input);
+		Tools.file.appendToFile(logPath, input);
 		t.getRadio().setStation(Float.parseFloat(input));
 		
-		Tools.printLog("log.txt", "Speed: ");
+		Tools.printLog(logPath, "Speed: ");
 		input = inputReader.nextLine();
-		Tools.file.appendToFile("log.txt", input);
+		Tools.file.appendToFile(logPath, input);
 		t.setSpeed(Float.parseFloat(input));
 		
 		return t;
@@ -241,26 +242,26 @@ public class UserConsoleInput {
 		Tools.print("Exit.\n");		
 	}
 	private void interactLog() {
-		Tools.printLog("log.txt", "Start.\n");
+		Tools.printLog(logPath, "Start.\n");
 		
 		if(props.isDoTests()) {
 			doTestsLog();
 		}
 		
-		Tools.printLog("log.txt", "Welcome - ", props.getUsername(), "\n");
+		Tools.printLog(logPath, "Welcome - ", props.getUsername(), "\n");
 		
 		if(props.isRoot()) {
-			Tools.printLog("log.txt", "You are in a root mode\n");
+			Tools.printLog(logPath, "You are in a root mode\n");
 		}
 		else {
-			Tools.printLog("log.txt", "You are in a user mode\n");
+			Tools.printLog(logPath, "You are in a user mode\n");
 		}
 		
 		boolean pass = false;
 		while(!pass) {
-			Tools.printLog("log.txt", "Enter your password: ");
+			Tools.printLog(logPath, "Enter your password: ");
 			input = inputReader.nextLine();
-			Tools.file.appendToFile("log.txt", input);
+			Tools.file.appendToFile(logPath, input);
 			if(props.getPassword().equals(input)) {
 				pass = true;
 			}
@@ -271,43 +272,14 @@ public class UserConsoleInput {
 			end = userMenuLog();
 		}
 		
-		Tools.printLog("log.txt", "Exit.\n");
+		Tools.printLog(logPath, "Exit.\n");
 	}
 	
 	private void doTests() {
 		Tools.print("Doing tests\n");
-//		float maxSpeedAvailable = 100;
-//		float maxBodyHeightAvailable = 10;
-//		float maxWeightAvailable = 2000;
-//		
-//		RoadPatrol patrol = new RoadPatrol(maxSpeedAvailable, maxBodyHeightAvailable, maxWeightAvailable);
-//		PassengerCar passCar = new PassengerCar("DeLorean", 999F, 100.1F, true);
-//		Truck truck = new Truck("Kamaz", 60F, 100.1F, false, 2000F, 5F);
-		
-//		RoadPatrol patrol = uci.createPatrolPoint();
-//		PassengerCar passCar = uci.createPassCar();
-//		Truck truck = uci.createTruck();
-		
-//		getIfPassInfo(passCar, patrol);
-//		getIfPassInfo(truck, patrol);
-//		getPatrolPointInfo(patrol);
-//		
-//		passCar.getRadio().playTunes();
-//		truck.getRadio().playTunes();
-		
-//		DataBase.getInstance("data.txt");
-//		DataBase.getInstance().load();
-//		
-//		DataBase.getInstance().addPassCar(passCar);
-//		DataBase.getInstance().addTruck(truck);
-//		DataBase.getInstance().addRoadPatrol(patrol);
-//		
-//		DataBase.getInstance().upload();
-//		
-//		Tools.print(DataBase.getInstance().getPassCars().size());
 	}
 	private void doTestsLog() {
-		Tools.printLog("log.txt", "Doing tests\n");
+		Tools.printLog(logPath, "Doing tests\n");
 	}
 	
 	private boolean userMenu() {
@@ -425,7 +397,7 @@ public class UserConsoleInput {
 		return false;
 	}
 	private boolean userMenuLog() {
-		Tools.printLog("log.txt",
+		Tools.printLog(logPath,
 				"Enter 0 to exit\n",
 				"Enter 1 to add new passenger car\n",
 				"Enter 2 to add new truck\n",
@@ -438,27 +410,28 @@ public class UserConsoleInput {
 				"Enter 9 to remove patrol point data\n"
 			);
 		if(props.isRoot()) {
-			Tools.printLog("log.txt", "Enter 10 to set debug mode\n",
-						"Enter 11 to set test mode\n");
+			Tools.printLog(logPath,
+							"Enter 10 to set debug mode\n",
+							"Enter 11 to set test mode\n");
 		}
 		
-		Tools.printLog("log.txt", "You enter: ");
+		Tools.printLog(logPath, "You enter: ");
 		input = inputReader.nextLine();
-		Tools.file.appendToFile("log.txt", input);		
+		Tools.file.appendToFile(logPath, input);		
 		
 		if(props.isRoot()) {
 			String localIn;
 			if(Integer.parseInt(input) == 10) {
-				Tools.printLog("log.txt", "Activate logging?: ");
+				Tools.printLog(logPath, "Activate logging?: ");
 				localIn = inputReader.nextLine();
-				Tools.file.appendToFile("log.txt", localIn);
+				Tools.file.appendToFile(logPath, localIn);
 				
 				props.setDoLog(Boolean.parseBoolean(localIn));
 			}
 			if(Integer.parseInt(input) == 11) {
-				Tools.printLog("log.txt", "Activate tests?: ");
+				Tools.printLog(logPath, "Activate tests?: ");
 				localIn = inputReader.nextLine();
-				Tools.file.appendToFile("log.txt", localIn);
+				Tools.file.appendToFile(logPath, localIn);
 				
 				props.setDoTests(Boolean.parseBoolean(localIn));
 			}
@@ -480,75 +453,75 @@ public class UserConsoleInput {
 			DataBase.getInstance().addRoadPatrol(patrol);
 			break;
 		case 4:
-			Tools.printLog("log.txt", "Enter index of element: ");
+			Tools.printLog(logPath, "Enter index of element: ");
 			input = inputReader.nextLine();
-			Tools.file.appendToFile("log.txt", input);	
+			Tools.file.appendToFile(logPath, input);	
 			
 			if(Integer.parseInt(input) < db.getInstance().getPassCars().size()) {
-				Tools.printLog("log.txt", getPassCarInfo(db.getInstance().getPassCarAt(Integer.parseInt(input))));
+				Tools.printLog(logPath, getPassCarInfo(db.getInstance().getPassCarAt(Integer.parseInt(input))));
 			}
 			else {
-				Tools.printLog("log.txt", "Exceeded size of array\n");
+				Tools.printLog(logPath, "Exceeded size of array\n");
 			}
 			break;
 		case 5:
-			Tools.printLog("log.txt", "Enter index of element: ");
+			Tools.printLog(logPath, "Enter index of element: ");
 			input = inputReader.nextLine();
-			Tools.file.appendToFile("log.txt", input);	
+			Tools.file.appendToFile(logPath, input);	
 			
 			if(Integer.parseInt(input) < db.getInstance().getTrucks().size()) {
-				Tools.printLog("log.txt", getTruckInfo(db.getInstance().getTruckAt(Integer.parseInt(input))));
+				Tools.printLog(logPath, getTruckInfo(db.getInstance().getTruckAt(Integer.parseInt(input))));
 			}
 			else {
-				Tools.printLog("log.txt", "Exceeded size of array\n");
+				Tools.printLog(logPath, "Exceeded size of array\n");
 			}
 			break;
 		case 6:
-			Tools.printLog("log.txt", "Enter index of element: ");
+			Tools.printLog(logPath, "Enter index of element: ");
 			input = inputReader.nextLine();
-			Tools.file.appendToFile("log.txt", input);	
+			Tools.file.appendToFile(logPath, input);	
 			
 			if(Integer.parseInt(input) < db.getInstance().getPatrols().size()) {
-				Tools.printLog("log.txt", getPatrolPointInfo(db.getInstance().getRoadPatrolAt(Integer.parseInt(input))));
+				Tools.printLog(logPath, getPatrolPointInfo(db.getInstance().getRoadPatrolAt(Integer.parseInt(input))));
 			}
 			else {
-				Tools.printLog("log.txt", "Exceeded size of array\n");
+				Tools.printLog(logPath, "Exceeded size of array\n");
 			}
 			break;
 		case 7:
-			Tools.printLog("log.txt", "Enter index of deleting element: ");
+			Tools.printLog(logPath, "Enter index of deleting element: ");
 			input = inputReader.nextLine();
-			Tools.file.appendToFile("log.txt", input);	
+			Tools.file.appendToFile(logPath, input);	
 			
 			if(Integer.parseInt(input) < db.getInstance().getPatrols().size()) {
 				DataBase.getInstance().removePassCarAt(Integer.parseInt(input));
 			}
 			else {
-				Tools.printLog("log.txt", "Exceeded size of array\n");
+				Tools.printLog(logPath, "Exceeded size of array\n");
 			}
 			break;
 		case 8:
-			Tools.printLog("log.txt", "Enter index of deleting element: ");
+			Tools.printLog(logPath, "Enter index of deleting element: ");
 			input = inputReader.nextLine();
-			Tools.file.appendToFile("log.txt", input);	
+			Tools.file.appendToFile(logPath, input);	
 			
 			if(Integer.parseInt(input) < db.getInstance().getPatrols().size()) {
 				DataBase.getInstance().removeTruckAt(Integer.parseInt(input));
 			}
 			else {
-				Tools.printLog("log.txt", "Exceeded size of array\n");
+				Tools.printLog(logPath, "Exceeded size of array\n");
 			}
 			break;
 		case 9:
-			Tools.printLog("log.txt", "Enter index of deleting element: ");
+			Tools.printLog(logPath, "Enter index of deleting element: ");
 			input = inputReader.nextLine();
-			Tools.file.appendToFile("log.txt", input);	
+			Tools.file.appendToFile(logPath, input);	
 			
 			if(Integer.parseInt(input) < db.getInstance().getPatrols().size()) {
 				DataBase.getInstance().removeRoadPatrolAt(Integer.parseInt(input));
 			}
 			else {
-				Tools.printLog("log.txt", "Exceeded size of array\n");
+				Tools.printLog(logPath, "Exceeded size of array\n");
 			}
 			break;
 		default:

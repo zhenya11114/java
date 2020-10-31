@@ -2,6 +2,12 @@ package model;
 
 import java.util.List;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -110,14 +116,31 @@ public class DataBase implements Serializable{
 		return result;
 	}
 	public void upload() {
-		Tools.file.serialize(base.filePath, base);
-		
-		//Tools.file.createFile(dbFilePath, toString(), true);
+		try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filePath))){
+			oos.writeObject(base);
+		}
+		catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
-	public void load() {		
-		ArrayList<Object> list = Tools.file.deserialize(base.filePath);
-		if (list.size() > 0) {
-			base = (DataBase)list.get(0);
+	public void load() {
+		File f = new File(filePath);
+		if(f.exists() && !f.isDirectory()) {
+			try(ObjectInputStream in = new ObjectInputStream(new FileInputStream(f))) {
+				base = (DataBase)in.readObject();
+			}
+			catch(IOException e) {
+			    e.printStackTrace();
+			}
+			catch(ClassNotFoundException e) {
+			    e.printStackTrace();
+			}
+		}
+		else {
+			Tools.file.createFile(filePath, "");
 		}
 	}
 }

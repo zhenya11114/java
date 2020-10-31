@@ -20,7 +20,7 @@ public class Tools
 	        catch(Exception e){
 	        	System.out.println("An error occurred.");
 				e.printStackTrace();
-	        } 
+	        }
 		}
 		public static ArrayList<Object> deserialize(String filePath) {
 			ArrayList<Object> result = new ArrayList<Object>();
@@ -84,12 +84,12 @@ public class Tools
 	     */
 	    public static void createFile(String path, String content) {
 	    	try {
-	    		File f = new File(path);
-				if (f.createNewFile()) {
-					//System.out.println("File created: " + f.getName() + '\n');
-				}
+//	    		File f = new File(path);
+//				if (f.createNewFile()) {
+//					//System.out.println("File created: " + f.getName() + '\n');
+//				}
 				
-				FileWriter writer = new FileWriter(f);
+				FileWriter writer = new FileWriter(path);
 		        writer.write(content);
 		        writer.close();
 	    	}
