@@ -1,0 +1,24 @@
+2020-11-10 17:52:28
+Start.
+2020-11-10 17:52:28
+Start tests
+2020-11-10 17:52:35
+Elapsed time: 7.4308333s
+2020-11-10 17:52:35
+Elapsed median time: 6.755303E-5s
+2020-11-10 17:52:35
+Add time: 3.000967s, elemets 100000
+2020-11-10 17:52:35
+Add median time: 3.000967E-5s, elemets 100000
+2020-11-10 17:52:35
+Remove time: 4.4298663s, elements 10000
+2020-11-10 17:52:35
+Remove median time: 4.4298664E-4s, elements 10000
+2020-11-10 17:52:35
+End tests
+2020-11-10 17:52:35
+Welcome - 1
+2020-11-10 17:52:35
+You are in a root mode
+2020-11-10 17:52:35
+Enter your password: 

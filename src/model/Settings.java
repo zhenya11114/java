@@ -75,7 +75,7 @@ public class Settings{
 		isFirstStart = true;
 	}
 	
-	public void upload() {
+	public void upload() throws IOException {
 		try (OutputStream output = new FileOutputStream(filePath)) {
             props.setProperty("username", username);
             props.setProperty("password", password);
@@ -87,11 +87,8 @@ public class Settings{
 
             props.store(output, null);
         }
-		catch (IOException io) {
-            io.printStackTrace();
-        }
 	}
-	public void load() {
+	public void load() throws IOException {
 		File f = new File(filePath);
 		if(f.exists() && !f.isDirectory()) {
 			try(FileInputStream fis = new FileInputStream(f)) {
@@ -104,9 +101,6 @@ public class Settings{
 				doLog = Boolean.parseBoolean(props.getProperty("doLog"));
 				doTests = Boolean.parseBoolean(props.getProperty("doTests"));
 				isFirstStart = Boolean.parseBoolean(props.getProperty("isFirstStart"));
-			}
-			catch (IOException e) {
-				e.printStackTrace();
 			}
 		}
 		else {

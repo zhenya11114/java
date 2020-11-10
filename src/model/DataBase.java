@@ -1,15 +1,15 @@
 package model;
 
-import java.util.List;
+import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class DataBase implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -42,7 +42,6 @@ public class DataBase implements Serializable{
 		super();
 		
 		this.filePath = dbFilePath;
-		
 	}
 	
 	public String getDbFilePath() {
@@ -51,19 +50,19 @@ public class DataBase implements Serializable{
 	public void setDbFilePath(String dbFilePath) {
 		this.filePath = dbFilePath;
 	}
-	public List<PassengerCar> getPassCars() {
+	public ArrayList<PassengerCar> getPassCars() {
 		return passCars;
 	}
 	public void setPassCars(ArrayList<PassengerCar> passCars) {
 		this.passCars = passCars;
 	}
-	public List<Truck> getTrucks() {
+	public ArrayList<Truck> getTrucks() {
 		return trucks;
 	}
 	public void setTrucks(ArrayList<Truck> trucks) {
 		this.trucks = trucks;
 	}
-	public List<RoadPatrol> getPatrols() {
+	public ArrayList<RoadPatrol> getPatrols() {
 		return patrols;
 	}
 	public void setPatrols(ArrayList<RoadPatrol> patrols) {
@@ -77,6 +76,35 @@ public class DataBase implements Serializable{
 		trucks.add(t);
 	}
 	public void addRoadPatrol(RoadPatrol rp) {
+		patrols.add(rp);
+	}
+	
+	public void addRndPassCar() {
+		PassengerCar c = new PassengerCar();
+		c.setBrand(Tools.genRandomString(5));
+		c.setSpeed(Tools.genRandomNum(10, 150));
+		
+		c.getRadio().setOn(Tools.genRandomBool());
+		c.getRadio().setStation(Tools.genRandomNum(100, 150));
+		passCars.add(c);
+	}
+	public void addRndTruck() {
+		Truck t = new Truck();
+		t.setBrand(Tools.genRandomString(5));
+		t.setSpeed(Tools.genRandomNum(10, 150));
+		
+		t.getRadio().setOn(Tools.genRandomBool());
+		t.getRadio().setStation(Tools.genRandomNum(100, 150));
+		
+		t.setBodyHeight(Tools.genRandomNum(0, 15));
+		t.setWeight(Tools.genRandomNum(1000, 10000));
+		trucks.add(t);
+	}
+	public void addRndRoadPatrol() {
+		RoadPatrol rp = new RoadPatrol();
+		rp.setMaxBodyHeightAvailable(Tools.genRandomNum(5, 10));
+		rp.setMaxSpeedAvailable(Tools.genRandomNum(50, 80));
+		rp.setMaxWeightAvailable(Tools.genRandomNum(5000, 6000));
 		patrols.add(rp);
 	}
 	
@@ -115,32 +143,41 @@ public class DataBase implements Serializable{
 		}
 		return result;
 	}
-	public void upload() {
+	public void upload() throws IOException{
 		try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filePath))){
 			oos.writeObject(base);
 		}
-		catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
-	public void load() {
+	public void load() throws ClassNotFoundException, IOException{
 		File f = new File(filePath);
 		if(f.exists() && !f.isDirectory()) {
 			try(ObjectInputStream in = new ObjectInputStream(new FileInputStream(f))) {
 				base = (DataBase)in.readObject();
 			}
-			catch(IOException e) {
-			    e.printStackTrace();
-			}
-			catch(ClassNotFoundException e) {
-			    e.printStackTrace();
+			catch(EOFException e) {
+				
 			}
 		}
 		else {
 			Tools.file.createFile(filePath, "");
 		}
+	}
+	
+	//for tests, remove later
+	private LinkedList<PassengerCar> passCarsLinked = new LinkedList<PassengerCar>();
+	public void addRndPassCarLinked() {
+		PassengerCar c = new PassengerCar();
+		c.setBrand(Tools.genRandomString(5));
+		c.setSpeed(Tools.genRandomNum(10, 150));
+		
+		c.getRadio().setOn(Tools.genRandomBool());
+		c.getRadio().setStation(Tools.genRandomNum(100, 150));
+		passCarsLinked.add(c);
+	}
+	public void removePassCarAtLinked(int index) {
+		passCarsLinked.remove(index);
+	}
+	public LinkedList<PassengerCar> getPassCarsLinked() {
+		return passCarsLinked;
 	}
 }

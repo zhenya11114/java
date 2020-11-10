@@ -1,0 +1,46 @@
+2020-11-10 17:50:6
+Start.
+2020-11-10 17:50:6
+Start tests
+2020-11-10 17:50:6
+Add element at 0 in 0.073s
+2020-11-10 17:50:6
+Add element at 1 in 0.001s
+2020-11-10 17:50:6
+Add element at 2 in 0.0s
+2020-11-10 17:50:6
+Add element at 3 in 0.001s
+2020-11-10 17:50:6
+Add element at 4 in 0.0s
+2020-11-10 17:50:6
+Add element at 5 in 0.0s
+2020-11-10 17:50:6
+Add element at 6 in 0.0s
+2020-11-10 17:50:6
+Add element at 7 in 0.0s
+2020-11-10 17:50:6
+Add element at 8 in 0.0s
+2020-11-10 17:50:6
+Add element at 9 in 0.0s
+2020-11-10 17:50:6
+Remove element at 7 in 0.001s
+2020-11-10 17:50:6
+Elapsed time: 0.076000005s
+2020-11-10 17:50:6
+Elapsed median time: 0.0069090915s
+2020-11-10 17:50:6
+Add time: 0.075s, elemets 10
+2020-11-10 17:50:6
+Add median time: 0.0075000003s, elemets 10
+2020-11-10 17:50:6
+Remove time: 0.001s, elements 1
+2020-11-10 17:50:6
+Remove median time: 0.001s, elements 1
+2020-11-10 17:50:6
+End tests
+2020-11-10 17:50:6
+Welcome - 1
+2020-11-10 17:50:6
+You are in a root mode
+2020-11-10 17:50:6
+Enter your password: 

@@ -1,0 +1,244 @@
+2020-11-10 17:57:11
+Start.
+2020-11-10 17:57:11
+Start tests
+2020-11-10 17:57:11
+Add element at 9 in 0.076s
+2020-11-10 17:57:11
+Add element at 10 in 0.001s
+2020-11-10 17:57:11
+Add element at 11 in 0.001s
+2020-11-10 17:57:11
+Add element at 12 in 0.001s
+2020-11-10 17:57:11
+Add element at 13 in 0.0s
+2020-11-10 17:57:11
+Add element at 14 in 0.001s
+2020-11-10 17:57:11
+Add element at 15 in 0.0s
+2020-11-10 17:57:11
+Add element at 16 in 0.0s
+2020-11-10 17:57:11
+Add element at 17 in 0.0s
+2020-11-10 17:57:11
+Add element at 18 in 0.0s
+2020-11-10 17:57:11
+Add element at 19 in 0.0s
+2020-11-10 17:57:11
+Add element at 20 in 0.001s
+2020-11-10 17:57:11
+Add element at 21 in 0.001s
+2020-11-10 17:57:11
+Add element at 22 in 0.001s
+2020-11-10 17:57:11
+Add element at 23 in 0.001s
+2020-11-10 17:57:11
+Add element at 24 in 0.001s
+2020-11-10 17:57:11
+Add element at 25 in 0.001s
+2020-11-10 17:57:11
+Add element at 26 in 0.001s
+2020-11-10 17:57:11
+Add element at 27 in 0.0s
+2020-11-10 17:57:11
+Add element at 28 in 0.001s
+2020-11-10 17:57:11
+Add element at 29 in 0.0s
+2020-11-10 17:57:11
+Add element at 30 in 0.0s
+2020-11-10 17:57:11
+Add element at 31 in 0.0s
+2020-11-10 17:57:11
+Add element at 32 in 0.001s
+2020-11-10 17:57:11
+Add element at 33 in 0.001s
+2020-11-10 17:57:11
+Add element at 34 in 0.001s
+2020-11-10 17:57:11
+Add element at 35 in 0.001s
+2020-11-10 17:57:11
+Add element at 36 in 0.0s
+2020-11-10 17:57:11
+Add element at 37 in 0.0s
+2020-11-10 17:57:11
+Add element at 38 in 0.0s
+2020-11-10 17:57:11
+Add element at 39 in 0.0s
+2020-11-10 17:57:11
+Add element at 40 in 0.001s
+2020-11-10 17:57:11
+Add element at 41 in 0.001s
+2020-11-10 17:57:11
+Add element at 42 in 0.001s
+2020-11-10 17:57:11
+Add element at 43 in 0.001s
+2020-11-10 17:57:11
+Add element at 44 in 0.001s
+2020-11-10 17:57:11
+Add element at 45 in 0.0s
+2020-11-10 17:57:11
+Add element at 46 in 0.0s
+2020-11-10 17:57:11
+Add element at 47 in 0.0s
+2020-11-10 17:57:11
+Add element at 48 in 0.0s
+2020-11-10 17:57:11
+Add element at 49 in 0.0s
+2020-11-10 17:57:11
+Add element at 50 in 0.0s
+2020-11-10 17:57:11
+Add element at 51 in 0.0s
+2020-11-10 17:57:11
+Add element at 52 in 0.001s
+2020-11-10 17:57:11
+Add element at 53 in 0.0s
+2020-11-10 17:57:11
+Add element at 54 in 0.0s
+2020-11-10 17:57:11
+Add element at 55 in 0.001s
+2020-11-10 17:57:11
+Add element at 56 in 0.001s
+2020-11-10 17:57:11
+Add element at 57 in 0.001s
+2020-11-10 17:57:11
+Add element at 58 in 0.0s
+2020-11-10 17:57:11
+Add element at 59 in 0.0s
+2020-11-10 17:57:11
+Add element at 60 in 0.0s
+2020-11-10 17:57:11
+Add element at 61 in 0.0s
+2020-11-10 17:57:11
+Add element at 62 in 0.001s
+2020-11-10 17:57:11
+Add element at 63 in 0.0s
+2020-11-10 17:57:11
+Add element at 64 in 0.0s
+2020-11-10 17:57:11
+Add element at 65 in 0.001s
+2020-11-10 17:57:11
+Add element at 66 in 0.0s
+2020-11-10 17:57:11
+Add element at 67 in 0.0s
+2020-11-10 17:57:11
+Add element at 68 in 0.0s
+2020-11-10 17:57:11
+Add element at 69 in 0.001s
+2020-11-10 17:57:11
+Add element at 70 in 0.0s
+2020-11-10 17:57:11
+Add element at 71 in 0.0s
+2020-11-10 17:57:11
+Add element at 72 in 0.001s
+2020-11-10 17:57:11
+Add element at 73 in 0.001s
+2020-11-10 17:57:11
+Add element at 74 in 0.0s
+2020-11-10 17:57:11
+Add element at 75 in 0.001s
+2020-11-10 17:57:11
+Add element at 76 in 0.001s
+2020-11-10 17:57:11
+Add element at 77 in 0.001s
+2020-11-10 17:57:11
+Add element at 78 in 0.001s
+2020-11-10 17:57:11
+Add element at 79 in 0.0s
+2020-11-10 17:57:11
+Add element at 80 in 0.0s
+2020-11-10 17:57:11
+Add element at 81 in 0.0s
+2020-11-10 17:57:11
+Add element at 82 in 0.001s
+2020-11-10 17:57:11
+Add element at 83 in 0.001s
+2020-11-10 17:57:11
+Add element at 84 in 0.001s
+2020-11-10 17:57:11
+Add element at 85 in 0.001s
+2020-11-10 17:57:11
+Add element at 86 in 0.001s
+2020-11-10 17:57:11
+Add element at 87 in 0.001s
+2020-11-10 17:57:11
+Add element at 88 in 0.0s
+2020-11-10 17:57:11
+Add element at 89 in 0.0s
+2020-11-10 17:57:11
+Add element at 90 in 0.0s
+2020-11-10 17:57:11
+Add element at 91 in 0.0s
+2020-11-10 17:57:11
+Add element at 92 in 0.0s
+2020-11-10 17:57:11
+Add element at 93 in 0.0s
+2020-11-10 17:57:11
+Add element at 94 in 0.0s
+2020-11-10 17:57:11
+Add element at 95 in 0.0s
+2020-11-10 17:57:11
+Add element at 96 in 0.001s
+2020-11-10 17:57:11
+Add element at 97 in 0.0s
+2020-11-10 17:57:11
+Add element at 98 in 0.0s
+2020-11-10 17:57:11
+Add element at 99 in 0.0s
+2020-11-10 17:57:11
+Add element at 100 in 0.0s
+2020-11-10 17:57:11
+Add element at 101 in 0.0s
+2020-11-10 17:57:11
+Add element at 102 in 0.001s
+2020-11-10 17:57:11
+Add element at 103 in 0.001s
+2020-11-10 17:57:11
+Add element at 104 in 0.0s
+2020-11-10 17:57:11
+Add element at 105 in 0.0s
+2020-11-10 17:57:11
+Add element at 106 in 0.0s
+2020-11-10 17:57:11
+Add element at 107 in 0.0s
+2020-11-10 17:57:11
+Add element at 108 in 0.0s
+2020-11-10 17:57:11
+Remove element at 45 in 0.0s
+2020-11-10 17:57:11
+Remove element at 24 in 0.0s
+2020-11-10 17:57:11
+Remove element at 66 in 0.0s
+2020-11-10 17:57:11
+Remove element at 92 in 0.0s
+2020-11-10 17:57:11
+Remove element at 29 in 0.0s
+2020-11-10 17:57:11
+Remove element at 21 in 0.001s
+2020-11-10 17:57:11
+Remove element at 57 in 0.0s
+2020-11-10 17:57:11
+Remove element at 90 in 0.0s
+2020-11-10 17:57:11
+Remove element at 65 in 0.0s
+2020-11-10 17:57:11
+Remove element at 47 in 0.0s
+2020-11-10 17:57:11
+Elapsed time: 0.12000009s
+2020-11-10 17:57:11
+Elapsed median time: 0.0010909099s
+2020-11-10 17:57:11
+Add time: 0.119000085s, elemets 100
+2020-11-10 17:57:11
+Add median time: 0.0011900008s, elemets 100
+2020-11-10 17:57:11
+Remove time: 0.001s, elements 10
+2020-11-10 17:57:11
+Remove median time: 1.00000005E-4s, elements 10
+2020-11-10 17:57:11
+End tests
+2020-11-10 17:57:11
+Welcome - 1
+2020-11-10 17:57:11
+You are in a root mode
+2020-11-10 17:57:11
+Enter your password: 

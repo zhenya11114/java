@@ -1,8 +1,7 @@
 package model;
 
 import java.io.*;
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -20,6 +19,7 @@ public class Tools
 	        catch(Exception e){
 	        	System.out.println("An error occurred.");
 				e.printStackTrace();
+				System.exit(0);
 	        }
 		}
 		public static ArrayList<Object> deserialize(String filePath) {
@@ -40,11 +40,13 @@ public class Tools
     			{
     			    System.out.println("IOException is caught");
     			    e.printStackTrace();
+    			    System.exit(0);
     			}
     			catch(ClassNotFoundException e)
     			{
     			    System.out.println("ClassNotFoundException is caught");
     			    e.printStackTrace();
+    			    System.exit(0);
     			}
     		}
     		else {
@@ -76,19 +78,13 @@ public class Tools
 			catch (IOException e) {
 				System.out.println("An error occurred.");
 				e.printStackTrace();
+				System.exit(0);
 			}
 	    }
 	    
-	    /* method create a new file and write content in
-	    /* method can rewrite the content if stated
-	     */
+	    //method create a new file and write content in
 	    public static void createFile(String path, String content) {
 	    	try {
-//	    		File f = new File(path);
-//				if (f.createNewFile()) {
-//					//System.out.println("File created: " + f.getName() + '\n');
-//				}
-				
 				FileWriter writer = new FileWriter(path);
 		        writer.write(content);
 		        writer.close();
@@ -96,6 +92,7 @@ public class Tools
 			catch (IOException e) {
 				System.out.println("An error occured.");
 				e.printStackTrace();
+				System.exit(0);
 			}
 	    }
 	    
@@ -119,8 +116,8 @@ public class Tools
 	    	}
 	    	catch(IOException e) {
 	    		System.out.println("File not found or error occured.");
-				//e.printStackTrace();
-				return "";
+				e.printStackTrace();
+				System.exit(0);
 	    	}
 	    	return result;
 	    }
@@ -132,19 +129,6 @@ public class Tools
         for (final T i : args) {
             System.out.print(i);
         }
-    }
-    
-    //logs indefinite amount of arguments
-    @SafeVarargs
-	public static <T> void printLog(String filePath, final T... args) {
-    	LocalDate day = LocalDate.now();
-    	LocalTime time = LocalTime.now(); 
-    	String toFile = day.toString() + " " + time.getHour() + ":" + time.getMinute() + ":" + time.getSecond() + '\n';
-        for (final T i : args) {
-        	toFile += i + "";
-        	System.out.print(i);
-        }
-        file.appendToFile(filePath, toFile);
     }
     
     /* implement this interface like:
@@ -159,7 +143,7 @@ public class Tools
     	long now1 = System.currentTimeMillis();
     	toRun.run();
 	    long now2 = System.currentTimeMillis();
-	    Tools.print("Ellapsed milliseconds: ",now2-now1,"\n");
+	    //Tools.print("Elapsed milliseconds: ",now2-now1,"\n");
 	    return now2-now1;
     }
     
@@ -174,5 +158,28 @@ public class Tools
     		return true;
     	}
     	return false;
+    }
+    
+    public static float genRandomNum(float min, float max) {
+    	return (float)(Math.random() * ((max - min) + 1)) + min;
+    }
+    public static double genRandomNum(double min, double max) {
+    	return (Math.random() * ((max - min) + 1)) + min;
+    }
+    public static int genRandomNum(int min, int max) {
+    	return (int)(Math.random() * ((max - min) + 1)) + min;
+    }
+    public static boolean genRandomBool() {
+    	float rnd = Tools.genRandomNum(-1, 1);
+    	return rnd < 0 ? false : true;
+    	
+    }
+    public static String genRandomString(int len) {
+    	final String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    	SecureRandom rnd = new SecureRandom();
+    	StringBuilder sb = new StringBuilder(len);
+	    for(int i = 0; i < len; i++)
+    	      sb.append(AB.charAt(rnd.nextInt(AB.length())));
+    	return sb.toString();
     }
 }

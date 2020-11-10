@@ -1,14 +1,19 @@
 package model;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class UserConsoleInput {
 	private String input = "";
 	private Scanner inputReader = new Scanner(System.in);
 	private Settings props = new Settings();
-	private String logPath = "log.txt";
+	private Logger logger;
+	private ExceptionHandler eHandler;
 	
-	DataBase db;
+	public UserConsoleInput(){
+		logger = new Logger("log.txt");
+		eHandler = new ExceptionHandler(logger);
+	}
 	
 	public RoadPatrol createPatrolPoint() {
 		RoadPatrol rp = new RoadPatrol();
@@ -28,20 +33,20 @@ public class UserConsoleInput {
 	public RoadPatrol createPatrolPointLog() {
 		RoadPatrol rp = new RoadPatrol();
 		
-		Tools.printLog(logPath, "Enter Road Patrol info\n");
-		Tools.printLog(logPath, "Max body height: ");
+		logger.printLog("Enter Road Patrol info\n");
+		logger.printLog("Max body height: ");
 		input = inputReader.nextLine();
-		Tools.file.appendToFile(logPath, input);
+		logger.appendToLog(input);
 		rp.setMaxBodyHeightAvailable(Float.parseFloat(input));
 		
-		Tools.printLog(logPath, "Max speed: ");
+		logger.printLog("Max speed: ");
 		input = inputReader.nextLine();
-		Tools.file.appendToFile(logPath, input);
+		logger.appendToLog(input);
 		rp.setMaxSpeedAvailable(Float.parseFloat(input));
 		
-		Tools.printLog(logPath, "Max weight: ");
+		logger.printLog("Max weight: ");
 		input = inputReader.nextLine();
-		Tools.file.appendToFile(logPath, input);
+		logger.appendToLog(input);
 		rp.setMaxWeightAvailable(Float.parseFloat(input));
 		
 		return rp;
@@ -69,25 +74,25 @@ public class UserConsoleInput {
 	public PassengerCar createPassCarLog() {
 		PassengerCar pc = new PassengerCar();
 		
-		Tools.printLog(logPath, "Enter Passenger Car info\n");
-		Tools.printLog(logPath, "Brand: ");
+		logger.printLog("Enter Passenger Car info\n");
+		logger.printLog("Brand: ");
 		input = inputReader.nextLine();
-		Tools.file.appendToFile(logPath, input);
+		logger.appendToLog(input);
 		pc.setBrand(input);
 		
-		Tools.printLog(logPath, "Is radio on: ");
+		logger.printLog("Is radio on: ");
 		input = inputReader.nextLine();
-		Tools.file.appendToFile(logPath, input);
+		logger.appendToLog(input);
 		pc.getRadio().setOn(Boolean.parseBoolean(input));
 		
-		Tools.printLog(logPath, "Set radio station: ");
+		logger.printLog("Set radio station: ");
 		input = inputReader.nextLine();
-		Tools.file.appendToFile(logPath, input);
+		logger.appendToLog(input);
 		pc.getRadio().setStation(Float.parseFloat(input));
 		
-		Tools.printLog(logPath, "Speed: ");
+		logger.printLog("Speed: ");
 		input = inputReader.nextLine();
-		Tools.file.appendToFile(logPath, input);
+		logger.appendToLog(input);
 		pc.setSpeed(Float.parseFloat(input));
 		
 		return pc;
@@ -122,35 +127,35 @@ public class UserConsoleInput {
 	public Truck createTruckLog() {
 		Truck t = new Truck();
 		
-		Tools.printLog(logPath, "Enter Truck info\n");
-		Tools.printLog(logPath, "Body height: ");
+		logger.printLog("Enter Truck info\n");
+		logger.printLog("Body height: ");
 		input = inputReader.nextLine();
-		Tools.file.appendToFile(logPath, input);
+		logger.appendToLog(input);
 		t.setBodyHeight(Float.parseFloat(input));
 		
-		Tools.printLog(logPath, "Weight: ");
+		logger.printLog("Weight: ");
 		input = inputReader.nextLine();
-		Tools.file.appendToFile(logPath, input);
+		logger.appendToLog(input);
 		t.setWeight(Float.parseFloat(input));
 		
-		Tools.printLog(logPath, "Brand: ");
+		logger.printLog("Brand: ");
 		input = inputReader.nextLine();
-		Tools.file.appendToFile(logPath, input);
+		logger.appendToLog(input);
 		t.setBrand(input);
 		
-		Tools.printLog(logPath, "Is radio on: ");
+		logger.printLog("Is radio on: ");
 		input = inputReader.nextLine();
-		Tools.file.appendToFile(logPath, input);
+		logger.appendToLog(input);
 		t.getRadio().setOn(Boolean.parseBoolean(input));
 		
-		Tools.printLog(logPath, "Set radio station: ");
+		logger.printLog("Set radio station: ");
 		input = inputReader.nextLine();
-		Tools.file.appendToFile(logPath, input);
+		logger.appendToLog(input);
 		t.getRadio().setStation(Float.parseFloat(input));
 		
-		Tools.printLog(logPath, "Speed: ");
+		logger.printLog("Speed: ");
 		input = inputReader.nextLine();
-		Tools.file.appendToFile(logPath, input);
+		logger.appendToLog(input);
 		t.setSpeed(Float.parseFloat(input));
 		
 		return t;
@@ -181,8 +186,22 @@ public class UserConsoleInput {
 	}
 
 	public void start() {
-		props.load();
-		db.getInstance("data.txt").load();
+		try {
+			props.load();
+		}
+		catch (IOException e) {
+			eHandler.handle(e);
+		}
+		
+		try {
+			DataBase.getInstance("data.txt").load();
+		}
+		catch (IOException e) {
+			eHandler.handle(e);
+		}
+		catch (ClassNotFoundException e) {
+			eHandler.handle(e);
+		}
 		
 		if(props.isFirstStart()) {	
 			props.setFirstStart(false);
@@ -205,8 +224,19 @@ public class UserConsoleInput {
 			interact();	
 		}
 		
-		db.getInstance().upload();
-		props.upload();
+		try {
+			DataBase.getInstance().upload();
+		}
+		catch (IOException e) {
+			eHandler.handle(e);
+		}
+		
+		try {
+			props.upload();
+		}
+		catch (IOException e) {
+			eHandler.handle(e);
+		}
 	}
 	
 	private void interact() {
@@ -242,26 +272,26 @@ public class UserConsoleInput {
 		Tools.print("Exit.\n");		
 	}
 	private void interactLog() {
-		Tools.printLog(logPath, "Start.\n");
+		logger.printLog("Start.\n");
 		
 		if(props.isDoTests()) {
 			doTestsLog();
 		}
 		
-		Tools.printLog(logPath, "Welcome - ", props.getUsername(), "\n");
+		logger.printLog("Welcome - ", props.getUsername(), "\n");
 		
 		if(props.isRoot()) {
-			Tools.printLog(logPath, "You are in a root mode\n");
+			logger.printLog("You are in a root mode\n");
 		}
 		else {
-			Tools.printLog(logPath, "You are in a user mode\n");
+			logger.printLog("You are in a user mode\n");
 		}
 		
 		boolean pass = false;
 		while(!pass) {
-			Tools.printLog(logPath, "Enter your password: ");
+			logger.printLog("Enter your password: ");
 			input = inputReader.nextLine();
-			Tools.file.appendToFile(logPath, input);
+			logger.appendToLog(input);
 			if(props.getPassword().equals(input)) {
 				pass = true;
 			}
@@ -272,14 +302,96 @@ public class UserConsoleInput {
 			end = userMenuLog();
 		}
 		
-		Tools.printLog(logPath, "Exit.\n");
+		logger.printLog("Exit.\n");
 	}
 	
 	private void doTests() {
-		Tools.print("Doing tests\n");
+		Tools.print("Start tests\n");
+		
+		float addTime = 0;
+		float removeTime = 0;
+		
+		int iterationAmount = 10;
+		int addAmount = iterationAmount;
+		int removeAmount = iterationAmount/10;
+		
+		for(int i = 0; i < addAmount; i++) {
+			Tools.Func o = () -> {
+//				DataBase.getInstance().addRndPassCar();
+				DataBase.getInstance().addRndPassCarLinked();
+			};
+			float operationTime = (float)Tools.countTime(o)/1000;
+			addTime += operationTime;
+			
+//			int addIndex = DataBase.getInstance().getPassCars().size()-1;
+			int addIndex = DataBase.getInstance().getPassCarsLinked().size()-1;
+			Tools.print("Add element at ", addIndex, " in ", operationTime, "s\n");
+		}
+		for(int i = 0; i < removeAmount; i++) {
+//			int removeIndex = Tools.genRandomNum(0, DataBase.getInstance().getPassCars().size()-1);
+			int removeIndex = Tools.genRandomNum(0, DataBase.getInstance().getPassCarsLinked().size()-1);
+			
+			Tools.Func o = () -> {
+//				DataBase.getInstance().removePassCarAt(removeIndex);
+				DataBase.getInstance().removePassCarAtLinked(removeIndex);
+			};
+			float operationTime = (float)Tools.countTime(o)/1000;
+			removeTime += operationTime;
+			
+			Tools.print("Remove element at ", removeIndex, " in ", operationTime, "s\n");
+		}
+		
+		Tools.print("Elapsed time: ", addTime + removeTime, "s\n");
+		Tools.print("Elapsed median time: ", (addTime + removeTime)/(addAmount + removeAmount), "s\n");
+		Tools.print("Add time: ", addTime, "s, elemets ", addAmount, "\n");
+		Tools.print("Add median time: ", addTime/addAmount, "s, elemets ", addAmount, "\n");
+		Tools.print("Remove time: ", removeTime, "s, elements ", removeAmount, "\n");
+		Tools.print("Remove median time: ", removeTime/removeAmount, "s, elements ", removeAmount, "\n");
+		Tools.print("End tests\n");
 	}
 	private void doTestsLog() {
-		Tools.printLog(logPath, "Doing tests\n");
+		logger.printLog("Start tests\n");
+		
+		float addTime = 0;
+		float removeTime = 0;
+		
+		int iterationAmount = 10;
+		int addAmount = iterationAmount;
+		int removeAmount = iterationAmount/10;
+		
+		for(int i = 0; i < addAmount; i++) {
+			Tools.Func o = () -> {
+				DataBase.getInstance().addRndPassCar();
+//				DataBase.getInstance().addRndPassCarLinked();
+			};
+			float operationTime = (float)Tools.countTime(o)/1000;
+			addTime += operationTime;
+			
+			int addIndex = DataBase.getInstance().getPassCars().size()-1;
+//			int addIndex = DataBase.getInstance().getPassCarsLinked().size()-1;
+			logger.printLog("Add element at ", addIndex, " in ", operationTime, "s\n");
+		}
+		for(int i = 0; i < removeAmount; i++) {
+			int removeIndex = Tools.genRandomNum(0, DataBase.getInstance().getPassCars().size()-1);
+//			int removeIndex = Tools.genRandomNum(0, DataBase.getInstance().getPassCarsLinked().size()-1);
+			
+			Tools.Func o = () -> {
+				DataBase.getInstance().removePassCarAt(removeIndex);
+//				DataBase.getInstance().removePassCarAtLinked(removeIndex);
+			};
+			float operationTime = (float)Tools.countTime(o)/1000;
+			removeTime += operationTime;
+			
+			logger.printLog("Remove element at ", removeIndex, " in ", operationTime, "s\n");
+		}
+		
+		logger.printLog("Elapsed time: ", addTime + removeTime, "s\n");
+		logger.printLog("Elapsed median time: ", (addTime + removeTime)/(addAmount + removeAmount), "s\n");
+		logger.printLog("Add time: ", addTime, "s, elemets ", addAmount, "\n");
+		logger.printLog("Add median time: ", addTime/addAmount, "s, elemets ", addAmount, "\n");
+		logger.printLog("Remove time: ", removeTime, "s, elements ", removeAmount, "\n");
+		logger.printLog("Remove median time: ", removeTime/removeAmount, "s, elements ", removeAmount, "\n");
+		logger.printLog("End tests\n");
 	}
 	
 	private boolean userMenu() {
@@ -321,7 +433,7 @@ public class UserConsoleInput {
 			return true;
 		case 1:
 			PassengerCar passCar = createPassCar();
-			DataBase.getInstance().addPassCar(passCar);			
+			DataBase.getInstance().addPassCar(passCar);
 			break;
 		case 2:
 			Truck truck = createTruck();
@@ -334,8 +446,8 @@ public class UserConsoleInput {
 		case 4:
 			Tools.print("Enter index of element: ");
 			input = inputReader.nextLine();
-			if(Integer.parseInt(input) < db.getInstance().getPassCars().size()) {
-				Tools.print(getPassCarInfo(db.getInstance().getPassCarAt(Integer.parseInt(input))));
+			if(Integer.parseInt(input) < DataBase.getInstance().getPassCars().size()) {
+				Tools.print(getPassCarInfo(DataBase.getInstance().getPassCarAt(Integer.parseInt(input))),'\n');
 			}
 			else {
 				Tools.print("Exceeded size of array\n");
@@ -344,8 +456,8 @@ public class UserConsoleInput {
 		case 5:
 			Tools.print("Enter index of element: ");
 			input = inputReader.nextLine();
-			if(Integer.parseInt(input) < db.getInstance().getTrucks().size()) {
-				Tools.print(getTruckInfo(db.getInstance().getTruckAt(Integer.parseInt(input))));
+			if(Integer.parseInt(input) < DataBase.getInstance().getTrucks().size()) {
+				Tools.print(getTruckInfo(DataBase.getInstance().getTruckAt(Integer.parseInt(input))),'\n');
 			}
 			else {
 				Tools.print("Exceeded size of array\n");
@@ -354,8 +466,8 @@ public class UserConsoleInput {
 		case 6:
 			Tools.print("Enter index of element: ");
 			input = inputReader.nextLine();
-			if(Integer.parseInt(input) < db.getInstance().getPatrols().size()) {
-				Tools.print(getPatrolPointInfo(db.getInstance().getRoadPatrolAt(Integer.parseInt(input))));
+			if(Integer.parseInt(input) < DataBase.getInstance().getPatrols().size()) {
+				Tools.print(getPatrolPointInfo(DataBase.getInstance().getRoadPatrolAt(Integer.parseInt(input))),'\n');
 			}
 			else {
 				Tools.print("Exceeded size of array\n");
@@ -364,7 +476,7 @@ public class UserConsoleInput {
 		case 7:
 			Tools.print("Enter index of deleting element: ");
 			input = inputReader.nextLine();
-			if(Integer.parseInt(input) < db.getInstance().getPatrols().size()) {
+			if(Integer.parseInt(input) < DataBase.getInstance().getPassCars().size()) {
 				DataBase.getInstance().removePassCarAt(Integer.parseInt(input));
 			}
 			else {
@@ -374,7 +486,7 @@ public class UserConsoleInput {
 		case 8:
 			Tools.print("Enter index of deleting element: ");
 			input = inputReader.nextLine();
-			if(Integer.parseInt(input) < db.getInstance().getPatrols().size()) {
+			if(Integer.parseInt(input) < DataBase.getInstance().getTrucks().size()) {
 				DataBase.getInstance().removeTruckAt(Integer.parseInt(input));
 			}
 			else {
@@ -384,7 +496,7 @@ public class UserConsoleInput {
 		case 9:
 			Tools.print("Enter index of deleting element: ");
 			input = inputReader.nextLine();
-			if(Integer.parseInt(input) < db.getInstance().getPatrols().size()) {
+			if(Integer.parseInt(input) < DataBase.getInstance().getPatrols().size()) {
 				DataBase.getInstance().removeRoadPatrolAt(Integer.parseInt(input));
 			}
 			else {
@@ -397,41 +509,39 @@ public class UserConsoleInput {
 		return false;
 	}
 	private boolean userMenuLog() {
-		Tools.printLog(logPath,
-				"Enter 0 to exit\n",
-				"Enter 1 to add new passenger car\n",
-				"Enter 2 to add new truck\n",
-				"Enter 3 to add new patrol point\n",
-				"Enter 4 to get passenger car data\n",
-				"Enter 5 to get truck data\n",
-				"Enter 6 to get patrol point data\n",
-				"Enter 7 to remove passenger data\n",
-				"Enter 8 to remove truck data\n",
-				"Enter 9 to remove patrol point data\n"
+		logger.printLog("Enter 0 to exit\n",
+						"Enter 1 to add new passenger car\n",
+						"Enter 2 to add new truck\n",
+						"Enter 3 to add new patrol point\n",
+						"Enter 4 to get passenger car data\n",
+						"Enter 5 to get truck data\n",
+						"Enter 6 to get patrol point data\n",
+						"Enter 7 to remove passenger data\n",
+						"Enter 8 to remove truck data\n",
+						"Enter 9 to remove patrol point data\n"
 			);
 		if(props.isRoot()) {
-			Tools.printLog(logPath,
-							"Enter 10 to set debug mode\n",
+			logger.printLog("Enter 10 to set debug mode\n",
 							"Enter 11 to set test mode\n");
 		}
 		
-		Tools.printLog(logPath, "You enter: ");
+		logger.printLog("You enter: ");
 		input = inputReader.nextLine();
-		Tools.file.appendToFile(logPath, input);		
+		logger.appendToLog(input);		
 		
 		if(props.isRoot()) {
 			String localIn;
 			if(Integer.parseInt(input) == 10) {
-				Tools.printLog(logPath, "Activate logging?: ");
+				logger.printLog("Activate logging?: ");
 				localIn = inputReader.nextLine();
-				Tools.file.appendToFile(logPath, localIn);
+				logger.appendToLog(localIn);
 				
 				props.setDoLog(Boolean.parseBoolean(localIn));
 			}
 			if(Integer.parseInt(input) == 11) {
-				Tools.printLog(logPath, "Activate tests?: ");
+				logger.printLog("Activate tests?: ");
 				localIn = inputReader.nextLine();
-				Tools.file.appendToFile(logPath, localIn);
+				logger.appendToLog(localIn);
 				
 				props.setDoTests(Boolean.parseBoolean(localIn));
 			}
@@ -453,75 +563,75 @@ public class UserConsoleInput {
 			DataBase.getInstance().addRoadPatrol(patrol);
 			break;
 		case 4:
-			Tools.printLog(logPath, "Enter index of element: ");
+			logger.printLog("Enter index of element: ");
 			input = inputReader.nextLine();
-			Tools.file.appendToFile(logPath, input);	
+			logger.appendToLog(input);	
 			
-			if(Integer.parseInt(input) < db.getInstance().getPassCars().size()) {
-				Tools.printLog(logPath, getPassCarInfo(db.getInstance().getPassCarAt(Integer.parseInt(input))));
+			if(Integer.parseInt(input) < DataBase.getInstance().getPassCars().size()) {
+				logger.printLog(getPassCarInfo(DataBase.getInstance().getPassCarAt(Integer.parseInt(input))),'\n');
 			}
 			else {
-				Tools.printLog(logPath, "Exceeded size of array\n");
+				logger.printLog("Exceeded size of array\n");
 			}
 			break;
 		case 5:
-			Tools.printLog(logPath, "Enter index of element: ");
+			logger.printLog("Enter index of element: ");
 			input = inputReader.nextLine();
-			Tools.file.appendToFile(logPath, input);	
+			logger.appendToLog(input);	
 			
-			if(Integer.parseInt(input) < db.getInstance().getTrucks().size()) {
-				Tools.printLog(logPath, getTruckInfo(db.getInstance().getTruckAt(Integer.parseInt(input))));
+			if(Integer.parseInt(input) < DataBase.getInstance().getTrucks().size()) {
+				logger.printLog(getTruckInfo(DataBase.getInstance().getTruckAt(Integer.parseInt(input))),'\n');
 			}
 			else {
-				Tools.printLog(logPath, "Exceeded size of array\n");
+				logger.printLog("Exceeded size of array\n");
 			}
 			break;
 		case 6:
-			Tools.printLog(logPath, "Enter index of element: ");
+			logger.printLog("Enter index of element: ");
 			input = inputReader.nextLine();
-			Tools.file.appendToFile(logPath, input);	
+			logger.appendToLog(input);	
 			
-			if(Integer.parseInt(input) < db.getInstance().getPatrols().size()) {
-				Tools.printLog(logPath, getPatrolPointInfo(db.getInstance().getRoadPatrolAt(Integer.parseInt(input))));
+			if(Integer.parseInt(input) < DataBase.getInstance().getPatrols().size()) {
+				logger.printLog(getPatrolPointInfo(DataBase.getInstance().getRoadPatrolAt(Integer.parseInt(input))),'\n');
 			}
 			else {
-				Tools.printLog(logPath, "Exceeded size of array\n");
+				logger.printLog("Exceeded size of array\n");
 			}
 			break;
 		case 7:
-			Tools.printLog(logPath, "Enter index of deleting element: ");
+			logger.printLog("Enter index of deleting element: ");
 			input = inputReader.nextLine();
-			Tools.file.appendToFile(logPath, input);	
+			logger.appendToLog(input);	
 			
-			if(Integer.parseInt(input) < db.getInstance().getPatrols().size()) {
+			if(Integer.parseInt(input) < DataBase.getInstance().getPassCars().size()) {
 				DataBase.getInstance().removePassCarAt(Integer.parseInt(input));
 			}
 			else {
-				Tools.printLog(logPath, "Exceeded size of array\n");
+				logger.printLog("Exceeded size of array\n");
 			}
 			break;
 		case 8:
-			Tools.printLog(logPath, "Enter index of deleting element: ");
+			logger.printLog("Enter index of deleting element: ");
 			input = inputReader.nextLine();
-			Tools.file.appendToFile(logPath, input);	
+			logger.appendToLog(input);	
 			
-			if(Integer.parseInt(input) < db.getInstance().getPatrols().size()) {
+			if(Integer.parseInt(input) < DataBase.getInstance().getTrucks().size()) {
 				DataBase.getInstance().removeTruckAt(Integer.parseInt(input));
 			}
 			else {
-				Tools.printLog(logPath, "Exceeded size of array\n");
+				logger.printLog("Exceeded size of array\n");
 			}
 			break;
 		case 9:
-			Tools.printLog(logPath, "Enter index of deleting element: ");
+			logger.printLog("Enter index of deleting element: ");
 			input = inputReader.nextLine();
-			Tools.file.appendToFile(logPath, input);	
+			logger.appendToLog(input);	
 			
-			if(Integer.parseInt(input) < db.getInstance().getPatrols().size()) {
+			if(Integer.parseInt(input) < DataBase.getInstance().getPatrols().size()) {
 				DataBase.getInstance().removeRoadPatrolAt(Integer.parseInt(input));
 			}
 			else {
-				Tools.printLog(logPath, "Exceeded size of array\n");
+				logger.printLog("Exceeded size of array\n");
 			}
 			break;
 		default:
