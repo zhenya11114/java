@@ -180,4 +180,7 @@ public class DataBase implements Serializable{
 	public LinkedList<PassengerCar> getPassCarsLinked() {
 		return passCarsLinked;
 	}
+	public void setPassCarsLinked(LinkedList<PassengerCar> passCars) {
+		this.passCarsLinked = passCars;
+	}
 }

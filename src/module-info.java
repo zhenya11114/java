@@ -1,2 +1,2 @@
-module my_prjct {
-}
+//module my_prjct {
+//}
