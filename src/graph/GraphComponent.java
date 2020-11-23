@@ -86,11 +86,11 @@ class GraphComponent extends JComponent {
 		
 		g2.setFont(font14);
 		g2.setColor(color);
-		g2.drawString(graphData.getTitle().getName(), (int) (leftX+width+50), prevTitleY);       
+		g2.drawString(graphData.getTitle().getName(), (int) (leftX+width+200)/2, (int) (topY-15));       
 		g2.setColor(defColor);
 		
 		g2.setFont(font10);
-		g2.drawString(graphData.getTitle().getMeansX(), (int) (leftX+width), (int) (topY+height+30));
+		g2.drawString(graphData.getTitle().getMeansX(), (int) (leftX+width+200), (int) (topY+height+30));
 		g2.drawString(graphData.getTitle().getMeansY(), (int) (leftX-35), (int) (topY-15));
 
 		if(logScale) {
